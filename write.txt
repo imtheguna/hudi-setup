@@ -1,13 +1,11 @@
-
 import org.apache.hudi.QuickstartUtils
 import scala.collection.JavaConversions
 import org.apache.spark.sql.SaveMode
 import org.apache.hudi.DataSourceReadOptions
-import org.apache.hudi.DataSourceReadOptions
+import org.apache.hudi.DataSourceWriteOptions
 import org.apache.hudi.config.HoodieWriteConfig
 import org.apache.hudi.common.model.HoodieRecord
 import org.apache.spark.sql.functions.{concat, lit}
-import spark.sqlContext.implicits._
 
 val df = spark.read.option("multiline", true).json("C:/Users/csgun/Documents/demo1.json");
 
