@@ -1,0 +1,54 @@
+{
+"group_id": "101",
+"emp": {
+    "emp_details_1": {
+        "id": 10,
+        "name": "Guna",
+        "address": "CHE",
+        "phone1": {"code":91, "number":888888888},
+        "phone2": {"code":91, "number":999999999},
+        "email" : {"personal":"zxc@gmail.com","office":"123@gmail.com"}
+        ,"Team" : {"name":"Povider","Lead" : {
+            "onsite" : {"name":"Madhan","Phone" : "1010101010"},
+            "offshore" : {"name":"Anand","Phone" : "9999969696"}
+          }}
+    },
+    
+    "emp_details_2": {
+        "id": 11,
+        "name": "Guna",
+        "address": "CHE",
+        "phone1": {"code":91, "number":888888888},
+        "phone2": {"code":91, "number":999999999},
+        "email" : {"personal":"zxc@gmail.com","office":""}
+        ,"Team" : {"name":"Povider","Lead" : {
+            "onsite" : {"name":"Madhan","Phone" : "1010101010"},
+            "offshore" :{"name":"Anand","Phone" : "9999969696"}
+          }}
+      },
+      "emp_details_3": {
+        "id": 12,
+        "name": "Guna",
+        "address": "CHE",
+        "phone1": {"code":91, "number":888888888},
+        "phone2": {"code":91, "number":999999999},
+        "email" : {"personal":"zxc@gmail.com","office":"123@gmail.com"}
+        ,"Team" : {"name":"Povider","Lead" : {
+            "onsite" : {"name":"Madhan","Phone" : "1010101010"},
+            "offshore" :{"name":"Anand","Phone" : "9999969696"}
+          }}
+      },
+      "emp_details_4": {
+        "id": 13,
+        "name": "Guna",
+        "address": "CHE",
+        "phone1": {"code":91, "number":888888888},
+        "phone2": {"code":91, "number":999999999},
+        "email" : {"personal":"zxc@gmail.com","office":"123@gmail.com"}
+        ,"Team" : {"name":"Povider","Lead" : {
+            "onsite" : {"name":"Madhan","Phone" : "1010101010"},
+            "offshore" :{"name":"Anand","Phone" : "9999969696"}
+          }}
+      }
+  }
+}

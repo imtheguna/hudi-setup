@@ -1,0 +1,19 @@
+import org.apache.hudi.QuickstartUtils
+import scala.collection.JavaConversions
+import org.apache.spark.sql.SaveMode
+import org.apache.hudi.DataSourceReadOptions
+import org.apache.hudi.DataSourceWriteOptions
+import org.apache.hudi.config.HoodieWriteConfig
+import org.apache.hudi.common.model.HoodieRecord
+import org.apache.spark.sql.functions.{concat, lit}
+
+val tableName = "hudi_trips_cow"
+val basePath = "file:///tmp/hudi_trips_cow"
+
+val tripsSnapshotDF = spark.
+  read.
+  format("org.apache.hudi").
+  load("file:///tmp/hudi_trips_cow").
+  createOrReplaceTempView("hudi_trips_snapshot")
+
+spark.sql("select id from  hudi_trips_snapshot").show()

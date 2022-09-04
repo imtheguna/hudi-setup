@@ -1,0 +1,45 @@
+
+import org.apache.hudi.QuickstartUtils
+import scala.collection.JavaConversions
+import org.apache.spark.sql.SaveMode
+import org.apache.hudi.DataSourceReadOptions
+import org.apache.hudi.DataSourceReadOptions
+import org.apache.hudi.config.HoodieWriteConfig
+import org.apache.hudi.common.model.HoodieRecord
+import org.apache.spark.sql.functions.{concat, lit}
+import spark.sqlContext.implicits._
+
+val df = spark.read.option("multiline", true).json("C:/Users/csgun/Documents/demo1.json");
+
+val dfg = df.select(col("group_id"),  explode(array("emp.*")) as "emp_details")
+  .withColumn("id", col("emp_details.id"))
+   .withColumn("name", col("emp_details.name"))
+  .withColumn("address", col("emp_details.address"))
+  .withColumn("Phone1", concat(lit("+"),col("emp_details.phone1.code"),lit("-"),col("emp_details.phone1.number")))
+  .withColumn("Phone2", concat(lit("+"),col("emp_details.phone2.code"),lit("-"),col("emp_details.phone2.number")))
+  .withColumn("Personal_email", col("emp_details.email.personal"))
+  .withColumn("Office_email", col("emp_details.email.office"))
+  .withColumn("Team", col("emp_details.Team.name"))
+  .withColumn("OnStie_lead_Name", col("emp_details.Team.Lead.onsite.name"))
+  .withColumn("OnStie_lead_Phone", col("emp_details.Team.Lead.onsite.Phone"))
+  .withColumn("offShore_lead_Name", col("emp_details.Team.Lead.offshore.name"))
+  .withColumn("offShore_lead_Phone", col("emp_details.Team.Lead.offshore.Phone"))  
+  .withColumn("ts", current_timestamp().as("current_timestamp"))
+  .drop("emp_details");
+
+val dff =  dfg.toDF();
+dff.show()
+val tableName = "hudi_trips_cow";
+val basePath = "file:///tmp/hudi_trips_cow";
+
+//HUDI_CONF_DIR="G:/Scala/hudi-defaults.conf"
+
+dff.write
+       .format("hudi")
+       .option(DataSourceWriteOptions.OPERATION_OPT_KEY,"insert_overwrite")
+       .option(DataSourceWriteOptions.RECORDKEY_FIELD_OPT_KEY, "ts")
+       .option(DataSourceWriteOptions.PARTITIONPATH_FIELD_OPT_KEY, "group_id")
+       .option(DataSourceWriteOptions.PRECOMBINE_FIELD_OPT_KEY, "id")
+       .option(HoodieWriteConfig.TABLE_NAME, tableName)
+       .mode(SaveMode.Append)
+       .save(basePath);
